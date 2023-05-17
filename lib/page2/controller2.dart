@@ -24,23 +24,27 @@ class Controller2 extends GetxController {
   }
 
   Future<void> checkMove(int i) async {
-    if (current.value == -1) {
-      current.value = i;
-      selected[i] = 1;
-    } else if (selected[i] == 0) {
-      selected[i] = 1;
-      if (tiles[i] != tiles[current.value]) {
-        await Future.delayed(const Duration(milliseconds: 450));
-        lives.value -= 1;
-        selected[i] = 0;
-        selected[current.value] = 0;
-        if (lives.value == 0) {
-          lose.value = true;
-        }
+    if (selected[i] == 0) {
+      if (current.value == -1) {
+        current.value = i;
+        selected[i] = 1;
       } else {
-        updateScore();
+        selected[i] = 1;
+        if (tiles[i] != tiles[current.value]) {
+          playing.value = false;
+          lives.value -= 1;
+          if (lives.value == 0) {
+            lose.value = true;
+          }
+          await Future.delayed(const Duration(milliseconds: 450));
+          playing.value = true;
+          selected[i] = 0;
+          selected[current.value] = 0;
+        } else {
+          updateScore();
+        }
+        current.value = -1;
       }
-      current.value = -1;
     }
   }
 
@@ -88,7 +92,7 @@ class Controller2 extends GetxController {
     if (selected[i] == 1) {
       return tiles[i];
     } else {
-      return "images/image.png";
+      return "images/empty.png";
     }
   }
 

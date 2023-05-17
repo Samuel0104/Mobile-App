@@ -45,7 +45,8 @@ class Game2 extends StatelessWidget {
                   style: GoogleFonts.staatliches(fontSize: 32)),
             ),
             Obx(
-              () => Text("${controller2.lives} vidas",
+              () => Text(
+                  "${controller2.lives.value} vida${controller2.lives.value != 1 ? "s" : ""}",
                   style: GoogleFonts.staatliches(fontSize: 16)),
             ),
             Expanded(
