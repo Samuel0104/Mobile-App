@@ -1,6 +1,6 @@
-import '../controller.dart';
+import 'package:get/get.dart';
 
-class Controller3 extends Controller {
+class Controller3 extends GetxController {
   @override
   void checkTry() {}
 

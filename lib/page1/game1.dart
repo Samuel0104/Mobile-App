@@ -74,7 +74,7 @@ class Game1 extends StatelessWidget {
                                   AlertDialog(
                                     title: const Text("INTÉNTALO DE NUEVO"),
                                     content: Text(
-                                        "¡Obtuviste ${controller1.score} puntos!"),
+                                        "¡Obtuviste ${10 * controller1.score.value} puntos!"),
                                     actions: <Widget>[
                                       TextButton(
                                         child: const Text("REGRESAR AL MENÚ"),

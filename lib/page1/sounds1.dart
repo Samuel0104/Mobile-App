@@ -9,12 +9,13 @@ class Sound {
   Future<void> setSound() async {
     for (var i = 0; i < 9; ++i) {
       soundId.add(await rootBundle
-          .load("button${i + 1}.mp3")
+          .load("sounds/button${i + 1}.mp3")
           .then((ByteData soundData) {
         return pool.load(soundData);
       }));
     }
-    soundId.add(await rootBundle.load("lose.mp3").then((ByteData soundData) {
+    soundId.add(
+        await rootBundle.load("sounds/lose.mp3").then((ByteData soundData) {
       return pool.load(soundData);
     }));
   }

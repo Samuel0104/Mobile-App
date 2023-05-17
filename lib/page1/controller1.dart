@@ -1,11 +1,13 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controller.dart';
 import 'dart:math';
 import 'sounds1.dart';
 
-class Controller1 extends Controller {
+class Controller1 extends GetxController {
+  var score = 1.obs;
+  var lose = false.obs;
+  var playing = false.obs;
   var answer = [].obs;
   var current = 0.obs;
   var colors = [Colors.teal, Colors.lightBlue];
@@ -21,18 +23,16 @@ class Controller1 extends Controller {
   checkMove(int tile) {
     if (tile != answer[current.value]) {
       lose.value = true;
-      sound.play(4);
+      // sound.play(4);
     }
     current.value++;
   }
 
-  @override
   void updateScore() {
     score.value++;
   }
 
-  @override
-  void checkTry() async {
+  Future<void> checkTry() async {
     if (current.value == answer.length && lose.value == false) {
       updateScore();
       current.value = 0;
