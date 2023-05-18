@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'controller1.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../scoreWidget.dart';
 
 class Game1 extends StatelessWidget {
   Game1({super.key});
@@ -15,6 +16,11 @@ class Game1 extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Juego 1"),
         actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.workspace_premium_sharp),
+            tooltip: "Mis Puntos",
+            onPressed: () => Get.dialog(ScoreDialog(1)),
+          ),
           IconButton(
             icon: const Icon(Icons.question_mark_outlined),
             tooltip: "Ayuda",
@@ -70,6 +76,7 @@ class Game1 extends StatelessWidget {
                             onTap: () {
                               controller1.attempt(i);
                               if (controller1.lose.value == true) {
+                                // controller1.editJson();
                                 Get.dialog(
                                   AlertDialog(
                                     title: const Text("INTÉNTALO DE NUEVO"),

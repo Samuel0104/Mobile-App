@@ -78,4 +78,6 @@ class Controller1 extends GetxController {
       addTile();
     }
   }
+
+  void editJson() {}
 }
