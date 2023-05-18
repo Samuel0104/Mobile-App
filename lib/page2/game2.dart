@@ -52,7 +52,7 @@ class Game2 extends StatelessWidget {
             Expanded(
               child: GridView.count(
                 primary: false,
-                padding: const EdgeInsets.symmetric(horizontal: 64),
+                padding: const EdgeInsets.all(32),
                 crossAxisSpacing: 16,
                 mainAxisSpacing: 16,
                 crossAxisCount: 3,

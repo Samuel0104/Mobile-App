@@ -40,7 +40,7 @@ class MenuPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Image(
-                          image: AssetImage("images/image.png"),
+                          image: AssetImage("assets/images/image.png"),
                           width: 210,
                           fit: BoxFit.cover,
                         ),
@@ -67,7 +67,7 @@ class MenuPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Image(
-                          image: AssetImage("images/image.png"),
+                          image: AssetImage("assets/images/image.png"),
                           width: 210,
                           fit: BoxFit.cover,
                         ),
@@ -99,7 +99,7 @@ class MenuPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Image(
-                          image: AssetImage("images/image.png"),
+                          image: AssetImage("assets/images/image.png"),
                           width: 210,
                           fit: BoxFit.cover,
                         ),
@@ -126,7 +126,7 @@ class MenuPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Image(
-                          image: AssetImage("images/image.png"),
+                          image: AssetImage("assets/images/image.png"),
                           width: 210,
                           fit: BoxFit.cover,
                         ),

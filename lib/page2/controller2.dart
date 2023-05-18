@@ -77,7 +77,7 @@ class Controller2 extends GetxController {
     tiles = [];
     for (var i = 0; i < 12; ++i) {
       int pos = Random().nextInt(12 - i);
-      tiles.add("images/card${temp[pos] + 1}.png");
+      tiles.add("assets/images/card${temp[pos] + 1}.png");
       temp.removeAt(pos);
     }
     await Future.delayed(const Duration(milliseconds: 50));
@@ -92,7 +92,7 @@ class Controller2 extends GetxController {
     if (selected[i] == 1) {
       return tiles[i];
     } else {
-      return "images/empty.png";
+      return "assets/images/empty.png";
     }
   }
 
