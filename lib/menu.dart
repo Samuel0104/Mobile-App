@@ -22,125 +22,44 @@ class MenuPage extends StatelessWidget {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Material(
-                  color: Colors.teal,
-                  elevation: 10,
-                  borderRadius: BorderRadius.circular(16),
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  child: InkWell(
-                    onTap: () {
-                      Get.toNamed("/game1");
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Image(
-                          image: AssetImage("assets/images/image.png"),
-                          width: 210,
-                          fit: BoxFit.cover,
+            Expanded(
+              child: GridView.count(
+                primary: false,
+                padding: const EdgeInsets.all(64),
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 32,
+                crossAxisCount: 1,
+                children: <Widget>[
+                  for (var i = 1; i <= 2; ++i)
+                    Material(
+                      color: Colors.teal,
+                      elevation: 10,
+                      borderRadius: BorderRadius.circular(16),
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      child: InkWell(
+                        onTap: () {
+                          Get.toNamed("/game$i");
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Image(
+                              image: AssetImage("assets/images/image.png"),
+                              fit: BoxFit.cover,
+                            ),
+                            const SizedBox(height: 6),
+                            Text(
+                              "Juego $i",
+                              style: GoogleFonts.staatliches(
+                                  fontSize: 24, color: Colors.white),
+                            )
+                          ],
                         ),
-                        const SizedBox(height: 6),
-                        Text(
-                          "Juego 1",
-                          style: GoogleFonts.staatliches(
-                              fontSize: 24, color: Colors.white),
-                        )
-                      ],
+                      ),
                     ),
-                  ),
-                ),
-                Material(
-                  color: Colors.teal,
-                  elevation: 10,
-                  borderRadius: BorderRadius.circular(16),
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  child: InkWell(
-                    onTap: () {
-                      Get.toNamed("/game2");
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Image(
-                          image: AssetImage("assets/images/image.png"),
-                          width: 210,
-                          fit: BoxFit.cover,
-                        ),
-                        const SizedBox(height: 6),
-                        Text(
-                          "Juego 2",
-                          style: GoogleFonts.staatliches(
-                              fontSize: 24, color: Colors.white),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Material(
-                  color: Colors.teal,
-                  elevation: 10,
-                  borderRadius: BorderRadius.circular(16),
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  child: InkWell(
-                    onTap: () {
-                      Get.toNamed("/game3");
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Image(
-                          image: AssetImage("assets/images/image.png"),
-                          width: 210,
-                          fit: BoxFit.cover,
-                        ),
-                        const SizedBox(height: 6),
-                        Text(
-                          "Juego 3",
-                          style: GoogleFonts.staatliches(
-                              fontSize: 24, color: Colors.white),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                Material(
-                  color: Colors.teal,
-                  elevation: 10,
-                  borderRadius: BorderRadius.circular(16),
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  child: InkWell(
-                    onTap: () {
-                      Get.toNamed("/game4");
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Image(
-                          image: AssetImage("assets/images/image.png"),
-                          width: 210,
-                          fit: BoxFit.cover,
-                        ),
-                        const SizedBox(height: 6),
-                        Text(
-                          "Juego 4",
-                          style: GoogleFonts.staatliches(
-                              fontSize: 24, color: Colors.white),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),
