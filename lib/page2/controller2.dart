@@ -2,8 +2,9 @@ import 'dart:async';
 import 'package:get/get.dart';
 import 'dart:math';
 import 'sounds2.dart';
+import '../score_widget.dart';
 
-class Controller2 extends GetxController {
+class Controller2 extends GetxController with ScoreDialog {
   var score = 10.obs;
   var lives = 5.obs;
   var lose = false.obs;
@@ -17,6 +18,7 @@ class Controller2 extends GetxController {
   onInit() {
     super.onInit();
     sound.setSound();
+    getScores(2);
   }
 
   void updateScore() {

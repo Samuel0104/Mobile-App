@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'controller1.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../scoreWidget.dart';
 
 class Game1 extends StatelessWidget {
   Game1({super.key});
@@ -19,7 +18,31 @@ class Game1 extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.workspace_premium_sharp),
             tooltip: "Mis Puntos",
-            onPressed: () => Get.dialog(ScoreDialog(1)),
+            onPressed: () {
+              Get.dialog(
+                AlertDialog(
+                  title: const Text("Mejores Puntuaciones"),
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      for (var i = 0; i < controller1.scores.length; ++i)
+                        Text(
+                          "${controller1.scores[i]}",
+                          style: GoogleFonts.staatliches(fontSize: 24),
+                        ),
+                    ],
+                  ),
+                  actions: <Widget>[
+                    TextButton(
+                      child: const Text("CERRAR"),
+                      onPressed: () => Get.back(),
+                    ),
+                  ],
+                ),
+              );
+            },
           ),
           IconButton(
             icon: const Icon(Icons.question_mark_outlined),

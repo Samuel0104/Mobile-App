@@ -16,6 +16,35 @@ class Game2 extends StatelessWidget {
         title: const Text("Juego 2"),
         actions: <Widget>[
           IconButton(
+            icon: const Icon(Icons.workspace_premium_sharp),
+            tooltip: "Mis Puntos",
+            onPressed: () {
+              Get.dialog(
+                AlertDialog(
+                  title: const Text("Mejores Puntuaciones"),
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      for (var i = 0; i < controller2.scores.length; ++i)
+                        Text(
+                          "${controller2.scores[i]}",
+                          style: GoogleFonts.staatliches(fontSize: 24),
+                        ),
+                    ],
+                  ),
+                  actions: <Widget>[
+                    TextButton(
+                      child: const Text("CERRAR"),
+                      onPressed: () => Get.back(),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+          IconButton(
             icon: const Icon(Icons.question_mark_outlined),
             tooltip: "Ayuda",
             onPressed: () => Get.dialog(

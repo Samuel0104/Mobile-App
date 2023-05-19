@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:math';
 import 'sounds1.dart';
+import '../score_widget.dart';
 
-class Controller1 extends GetxController {
+class Controller1 extends GetxController with ScoreDialog {
   var score = 1.obs;
   var lose = false.obs;
   var playing = false.obs;
@@ -18,6 +19,7 @@ class Controller1 extends GetxController {
   onInit() {
     super.onInit();
     sound.setSound();
+    getScores(1);
   }
 
   checkMove(int tile) {
