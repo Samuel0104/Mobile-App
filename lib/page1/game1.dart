@@ -99,7 +99,8 @@ class Game1 extends StatelessWidget {
                             onTap: () {
                               controller1.attempt(i);
                               if (controller1.lose.value == true) {
-                                // controller1.editJson();
+                                controller1.setScores(
+                                    1, 10 * controller1.score.value);
                                 Get.dialog(
                                   AlertDialog(
                                     title: const Text("INTÉNTALO DE NUEVO"),

@@ -97,6 +97,7 @@ class Game2 extends StatelessWidget {
                           onTap: () {
                             controller2.attempt(i);
                             if (controller2.lose.value == true) {
+                              controller2.setScores(2, controller2.score.value);
                               Get.dialog(
                                 AlertDialog(
                                   title: const Text("INTÉNTALO DE NUEVO"),
