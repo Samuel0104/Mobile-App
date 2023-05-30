@@ -22,9 +22,9 @@ class App extends StatelessWidget {
       title: "Proyecto",
       theme: Themes.light,
       darkTheme: Themes.dark,
-      initialRoute: "/menu",
+      initialRoute: "/home",
       getPages: [
-        GetPage(name: "/home", page: () => const HomePage()),
+        GetPage(name: "/home", page: () => HomePage()),
         GetPage(name: "/menu", page: () => const MenuPage()),
         GetPage(name: "/game1", page: () => Game1()),
         GetPage(name: "/game2", page: () => Game2()),

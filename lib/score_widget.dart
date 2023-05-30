@@ -11,18 +11,11 @@ mixin ScoreDialog {
   Future<void> getScores(int i) async {
     final dir = await getApplicationDocumentsDirectory();
     final file = File("${dir.path}/scores.json");
-    try {
-      final response = await file.readAsString();
-      final jsonRead = await jsonDecode(response);
-      var data = jsonRead["game$i"]["scores"];
-      for (var score = 0; score < 5 && score < data.length; ++score) {
-        scores.add(data[data.length - score - 1]);
-      }
-    } catch (e) {
-      await file.writeAsString(jsonEncode({
-        "game1": {"scores": []},
-        "game2": {"scores": []}
-      }));
+    final response = await file.readAsString();
+    final jsonRead = await jsonDecode(response);
+    var data = jsonRead["game$i"]["scores"];
+    for (var score = 0; score < 5 && score < data.length; ++score) {
+      scores.add(data[data.length - score - 1]);
     }
   }
 

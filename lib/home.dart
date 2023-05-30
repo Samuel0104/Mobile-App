@@ -1,12 +1,48 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:path_provider/path_provider.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+mixin JsonManager {
+  late final String user;
+
+  Future<void> createJson() async {
+    final dir = await getApplicationDocumentsDirectory();
+    final file = File("${dir.path}/scores.json");
+    try {
+      final response = await file.readAsString();
+      final jsonRead = await jsonDecode(response);
+      user = jsonRead["name"];
+    } catch (e) {
+      await file.writeAsString(jsonEncode({
+        "name": "",
+        "game1": {"scores": []},
+        "game2": {"scores": []}
+      }));
+      user = "";
+    }
+  }
+
+  Future<void> signJson(String name) async {
+    if (user == "") {
+      final dir = await getApplicationDocumentsDirectory();
+      final file = File("${dir.path}/scores.json");
+      final response = await file.readAsString();
+      final jsonRead = await jsonDecode(response);
+      jsonRead["name"] = name;
+      await file.writeAsString(jsonEncode(jsonRead));
+    }
+  }
+}
+
+class HomePage extends StatelessWidget with JsonManager {
+  HomePage({super.key});
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    createJson();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Menú principal"),
@@ -24,123 +60,44 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Material(
-                  color: Colors.teal,
-                  elevation: 10,
-                  borderRadius: BorderRadius.circular(16),
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  child: InkWell(
-                    onTap: () {
-                      Get.toNamed("/game1");
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Image(
-                          image: AssetImage("assets/image.png"),
-                          width: 210,
-                          fit: BoxFit.cover,
-                        ),
-                        const SizedBox(height: 6),
-                        Text(
-                          "Juego 1",
-                          style: GoogleFonts.staatliches(
-                              fontSize: 24, color: Colors.white),
-                        )
-                      ],
+            Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  const SizedBox(height: 64),
+                  TextFormField(
+                    keyboardType: TextInputType.name,
+                    textAlign: TextAlign.center,
+                    decoration: const InputDecoration(
+                      hintText: "Nombre completo",
                     ),
-                  ),
-                ),
-                Material(
-                  color: Colors.teal,
-                  elevation: 10,
-                  borderRadius: BorderRadius.circular(16),
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  child: InkWell(
-                    onTap: () {
-                      Get.toNamed("/game2");
+                    validator: (String? value) {
+                      if (value == null || value.isEmpty) {
+                        return "Por favor, ingresa tu nombre";
+                      }
+                      if (user != "" && user != value) {
+                        return "Nombre incorrecto";
+                      }
+                      return null;
                     },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Image(
-                          image: AssetImage("assets/image.png"),
-                          width: 210,
-                          fit: BoxFit.cover,
-                        ),
-                        const SizedBox(height: 6),
-                        Text(
-                          "Juego 2",
-                          style: GoogleFonts.staatliches(
-                              fontSize: 24, color: Colors.white),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Material(
-                  color: Colors.teal,
-                  elevation: 10,
-                  borderRadius: BorderRadius.circular(16),
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  child: InkWell(
-                    onTap: () {
-                      Get.toNamed("/game3");
+                    onSaved: (String? value) {
+                      if (value != null) {
+                        signJson(value);
+                      }
+                      Get.toNamed("/menu");
                     },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Image(
-                          image: AssetImage("assets/image.png"),
-                          width: 210,
-                          fit: BoxFit.cover,
-                        ),
-                        const SizedBox(height: 6),
-                        Text(
-                          "Juego 3",
-                          style: GoogleFonts.staatliches(
-                              fontSize: 24, color: Colors.white),
-                        )
-                      ],
-                    ),
                   ),
-                ),
-                Material(
-                  color: Colors.teal,
-                  elevation: 10,
-                  borderRadius: BorderRadius.circular(16),
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  child: InkWell(
-                    onTap: () {
-                      Get.toNamed("/game4");
+                  ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
+                      }
                     },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Image(
-                          image: AssetImage("assets/image.png"),
-                          width: 210,
-                          fit: BoxFit.cover,
-                        ),
-                        const SizedBox(height: 6),
-                        Text(
-                          "Juego 4",
-                          style: GoogleFonts.staatliches(
-                              fontSize: 24, color: Colors.white),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+                    child: const Text('SIGUIENTE'),
+                  )
+                ],
+              ),
             ),
           ],
         ),
