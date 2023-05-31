@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1029308543981",
+    "project_id": "brainies-3a187",
+    "storage_bucket": "brainies-3a187.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1029308543981:android:f075f5956f8abcb5d3ade4",
+        "android_client_info": {
+          "package_name": "com.brainies.game"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrvSg4Hx6tvduN8NpaKRM6oOm41VUmx0M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

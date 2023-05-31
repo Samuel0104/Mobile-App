@@ -13,6 +13,8 @@ dependencies:
   google_fonts: ^4.0.3
   soundpool: ^2.3.0
   path_provider: ^2.0.11
+  firebase_auth: ^4.6.2
+  cloud_firestore: ^4.8.0
 
 dev_dependencies:
   flutter_test:
