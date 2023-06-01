@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:project/services/database.dart';
 
 mixin JsonManager {
   late final String user;
@@ -49,6 +50,7 @@ mixin JsonManager {
         final jsonRead = await jsonDecode(response);
         jsonRead["name"] = name;
         await file.writeAsString(jsonEncode(jsonRead));
+        DatabaseService().updateUserData(name, false, {}, {});
       } else {
         final file = File("${dir.path}/stats.json");
         final response = await file.readAsString();
