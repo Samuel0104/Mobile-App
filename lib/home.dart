@@ -2,8 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:project/services/database.dart';
+import 'services/database.dart';
 
 mixin JsonManager {
   late final String user;
@@ -26,16 +27,7 @@ mixin JsonManager {
         "game1": {"scores": []},
         "game2": {"scores": []}
       }));
-      await file2.writeAsString(jsonEncode({
-        "name": "",
-        "id": {
-          "Samuel Moreno": {
-            "current": false,
-            "game1": {"31-05-23": 100, "20-05-23": 50},
-            "game2": {"31-05-23": 80, "20-05-23": 30}
-          },
-        },
-      }));
+      await file2.writeAsString(jsonEncode({"name": "", "id": {}}));
       user = "";
       admin = "";
     }
@@ -44,7 +36,7 @@ mixin JsonManager {
   Future<void> signJson(String name) async {
     if (user == "" && admin == "") {
       final dir = await getApplicationDocumentsDirectory();
-      if (name != "SOY ADMIN") {
+      if (name != "ADMiN") {
         final file = File("${dir.path}/scores.json");
         final response = await file.readAsString();
         final jsonRead = await jsonDecode(response);
@@ -83,60 +75,64 @@ class HomePage extends StatelessWidget with JsonManager {
         ],
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            const Image(
-              image: AssetImage("assets/images/logo.png"),
-            ),
-            Form(
-              key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  const SizedBox(height: 64),
-                  TextFormField(
-                    keyboardType: TextInputType.name,
-                    textAlign: TextAlign.center,
-                    decoration: const InputDecoration(
-                      hintText: "Nombre completo",
-                    ),
-                    validator: (String? value) {
-                      if (value == null || value.isEmpty) {
-                        return "Por favor, ingresa tu nombre";
-                      }
-                      if (user != "") {
-                        if (user != value) {
-                          return "Nombre incorrecto";
-                        }
-                      } else if (admin != "") {
-                        if (admin != value) {
-                          return "Nombre incorrecto";
-                        }
-                      }
-                      return null;
-                    },
-                    onSaved: (String? value) {
-                      signJson(value!);
-                      if (value == "SOY ADMIN") {
-                        Get.toNamed("/names");
-                      } else {
-                        Get.toNamed("/menu");
-                      }
-                    },
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        _formKey.currentState!.save();
-                      }
-                    },
-                    child: const Text('SIGUIENTE'),
-                  )
-                ],
+        child: Container(
+          padding: const EdgeInsets.all(32),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              const Image(
+                image: AssetImage("assets/images/logo.png"),
               ),
-            ),
-          ],
+              Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    const SizedBox(height: 64),
+                    TextFormField(
+                      keyboardType: TextInputType.name,
+                      textAlign: TextAlign.center,
+                      decoration: const InputDecoration(
+                        hintText: "Nombre completo",
+                      ),
+                      validator: (String? value) {
+                        if (value == null || value.isEmpty) {
+                          return "Por favor, ingresa tu nombre";
+                        }
+                        if (user != "") {
+                          if (user != value) {
+                            return "Nombre incorrecto";
+                          }
+                        } else if (admin != "") {
+                          if (admin != value) {
+                            return "Nombre incorrecto";
+                          }
+                        }
+                        return null;
+                      },
+                      onSaved: (String? value) {
+                        signJson(value!);
+                        if (value == "ADMiN") {
+                          Get.offNamed("/names");
+                        } else {
+                          Get.toNamed("/menu");
+                        }
+                      },
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          _formKey.currentState!.save();
+                        }
+                      },
+                      child: Text('SIGUIENTE',
+                          style: GoogleFonts.staatliches(fontSize: 28)),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

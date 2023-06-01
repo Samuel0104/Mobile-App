@@ -89,7 +89,7 @@ class Game2 extends StatelessWidget {
                   for (var i = 0; i < 12; ++i)
                     Obx(
                       () => Material(
-                        color: Colors.teal,
+                        color: const Color.fromARGB(200, 251, 105, 0),
                         elevation: 10,
                         borderRadius: BorderRadius.circular(16),
                         clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -114,11 +114,15 @@ class Game2 extends StatelessWidget {
                               );
                             }
                           },
-                          highlightColor: Colors.lightBlue,
-                          splashColor: Colors.lightBlue,
-                          child: Image(
-                            image: AssetImage(controller2.getTile(i)),
-                            fit: BoxFit.cover,
+                          highlightColor:
+                              const Color.fromARGB(255, 255, 183, 3),
+                          splashColor: const Color.fromARGB(255, 255, 183, 3),
+                          child: Container(
+                            padding: const EdgeInsets.all(2),
+                            child: Image(
+                              image: AssetImage(controller2.getTile(i)),
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       ),

@@ -11,7 +11,10 @@ class Controller1 extends GetxController with ScoreDialog {
   var playing = false.obs;
   var answer = [].obs;
   var current = 0.obs;
-  var colors = [Colors.teal, Colors.lightBlue];
+  var colors = [
+    const Color.fromARGB(200, 251, 105, 0),
+    const Color.fromARGB(255, 255, 183, 3)
+  ];
   var tiles = [for (var i = 0; i < 9; ++i) 0].obs;
   final sound = Sound();
 
@@ -52,7 +55,7 @@ class Controller1 extends GetxController with ScoreDialog {
     }
   }
 
-  MaterialColor getColor(int i) {
+  Color getColor(int i) {
     return colors[tiles[i]];
   }
 

@@ -26,10 +26,10 @@ class JsonReader2 extends GetxController {
         name.value = student;
         for (var i = 1; i <= 2; ++i) {
           scores.add(
-              Text("Juego $i", style: GoogleFonts.staatliches(fontSize: 24)));
+              Text("Juego $i", style: GoogleFonts.staatliches(fontSize: 36)));
           for (var game in data[student]["game$i"].keys) {
             scores.add(Text("$game: ${data[student]["game$i"][game]}",
-                style: GoogleFonts.staatliches(fontSize: 20)));
+                style: GoogleFonts.staatliches(fontSize: 24)));
           }
         }
         jsonRead["id"][student]["current"] = false;
@@ -52,6 +52,11 @@ class StatsPage extends StatelessWidget {
         title: Text(controller.name.value),
         actions: <Widget>[
           IconButton(
+            icon: const Icon(Icons.refresh_outlined),
+            tooltip: "Recargar",
+            onPressed: () => controller.readJson(),
+          ),
+          IconButton(
             icon: const Icon(Icons.brightness_4_outlined),
             tooltip: "Tema",
             onPressed: () => Get.changeThemeMode(
@@ -67,7 +72,7 @@ class StatsPage extends StatelessWidget {
               child: Obx(
                 () => ListView(
                   primary: false,
-                  padding: const EdgeInsets.all(64),
+                  padding: const EdgeInsets.all(32),
                   children: <Widget>[
                     for (var item in controller.scores) item,
                   ],

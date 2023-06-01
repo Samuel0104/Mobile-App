@@ -118,8 +118,9 @@ class Game1 extends StatelessWidget {
                                 );
                               }
                             },
-                            highlightColor: Colors.lightBlue,
-                            splashColor: Colors.lightBlue,
+                            highlightColor:
+                                const Color.fromARGB(255, 255, 183, 3),
+                            splashColor: const Color.fromARGB(255, 255, 183, 3),
                           ),
                         ),
                       ),

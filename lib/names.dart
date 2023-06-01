@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:path_provider/path_provider.dart';
+import 'services/database.dart';
 
 class JsonReader1 extends GetxController {
   var students = [].obs;
@@ -19,6 +20,13 @@ class JsonReader1 extends GetxController {
     final file = File("${dir.path}/stats.json");
     final response = await file.readAsString();
     final jsonRead = await jsonDecode(response);
+    var fetch = {};
+    var d = await DatabaseService().getUserData();
+    for (var name in d.keys) {
+      fetch[name] = d[name];
+    }
+    jsonRead["id"] = fetch;
+    await file.writeAsString(jsonEncode(jsonRead));
     for (var i in jsonRead["id"].keys) {
       students.add(i);
     }
@@ -62,24 +70,21 @@ class NamesPage extends StatelessWidget {
               child: Obx(
                 () => ListView(
                   primary: false,
-                  padding: const EdgeInsets.all(64),
+                  padding: const EdgeInsets.all(32),
                   children: <Widget>[
                     for (var i = 0; i < controller.students.length; ++i)
-                      Material(
-                        color: Colors.teal,
-                        elevation: 10,
-                        borderRadius: BorderRadius.circular(16),
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        child: InkWell(
-                          onTap: () {
-                            controller.selectStudent(controller.students[i]);
-                            Get.toNamed("/stats");
-                          },
-                          child: Text(
-                            controller.students[i],
-                            style: GoogleFonts.staatliches(
-                                fontSize: 20, color: Colors.white),
-                          ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          textStyle: GoogleFonts.staatliches(fontSize: 24),
+                        ),
+                        onPressed: () {
+                          controller.selectStudent(controller.students[i]);
+                          Get.toNamed("/stats");
+                        },
+                        child: Text(
+                          controller.students[i],
+                          style: GoogleFonts.staatliches(
+                              fontSize: 20, color: Colors.white),
                         ),
                       ),
                   ],
